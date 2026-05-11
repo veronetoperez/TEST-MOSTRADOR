@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Gratuito — ¿Tu equipo despacha o recomienda? | Verónica Neto</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --beige: #F5EFE6;
+    --beige-dark: #EDE3D4;
+    --terracota: #A85C3A;
+    --terracota-light: #C27A57;
+    --terracota-dark: #7A3F23;
+    --negro: #1C1510;
+    --gris: #6B5E54;
+    --blanco: #FDFAF6;
+    --sombra: rgba(28,21,16,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--beige);
+    color: var(--negro);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* DECORATIVE BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(168,92,58,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -150px;
+    left: -150px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(168,92,58,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: var(--terracota);
+    color: var(--blanco);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 6vw, 42px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--negro);
+    margin-bottom: 16px;
+  }
+
+  .header h1 em {
+    color: var(--terracota);
+    font-style: italic;
+  }
+
+  .header p {
+    font-size: 16px;
+    color: var(--gris);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto 24px;
+  }
+
+  .header-divider {
+    width: 48px;
+    height: 2px;
+    background: var(--terracota);
+    margin: 0 auto;
+  }
+
+  /* PROGRESS */
+  .progress-wrap {
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .progress-label {
+    font-size: 13px;
+    color: var(--gris);
+    font-weight: 500;
+  }
+
+  .progress-count {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--terracota);
+    font-weight: 600;
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--beige-dark);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--terracota-dark), var(--terracota-light));
+    border-radius: 4px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+  }
+
+  /* QUESTION CARD */
+  .question-card {
+    background: var(--blanco);
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-shadow: 0 4px 32px var(--sombra);
+    margin-bottom: 24px;
+    animation: fadeUp 0.5s ease both;
+    border: 1px solid rgba(168,92,58,0.08);
+  }
+
+  .question-number {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--terracota);
+    margin-bottom: 12px;
+  }
+
+  .question-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 4vw, 22px);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--negro);
+    margin-bottom: 28px;
+  }
+
+  /* OPTIONS */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--beige);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--negro);
+    line-height: 1.4;
+  }
+
+  .option-btn:hover {
+    background: var(--beige-dark);
+    border-color: var(--terracota-light);
+    transform: translateX(4px);
+  }
+
+  .option-btn.selected {
+    background: rgba(168,92,58,0.08);
+    border-color: var(--terracota);
+  }
+
+  .option-dot {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--beige-dark);
+    background: var(--blanco);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gris);
+  }
+
+  .option-btn.selected .option-dot {
+    background: var(--terracota);
+    border-color: var(--terracota);
+    color: white;
+  }
+
+  /* NAV BUTTONS */
+  .nav-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    animation: fadeUp 0.5s ease 0.1s both;
+  }
+
+  .btn-back {
+    padding: 14px 24px;
+    background: transparent;
+    border: 2px solid var(--beige-dark);
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--gris);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-back:hover {
+    border-color: var(--gris);
+    color: var(--negro);
+  }
+
+  .btn-next {
+    padding: 14px 32px;
+    background: var(--terracota);
+    border: 2px solid var(--terracota);
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--blanco);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .btn-next.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .btn-next.active:hover {
+    background: var(--terracota-dark);
+    border-color: var(--terracota-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(168,92,58,0.3);
+  }
+
+  /* RESULT SCREEN */
+  .result-screen {
+    display: none;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .result-screen.show { display: block; }
+
+  .result-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .result-score-ring {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .result-score-ring::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 4px solid var(--beige-dark);
+  }
+
+  .result-score-ring::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top-color: var(--terracota);
+    border-right-color: var(--terracota);
+    transform: rotate(-45deg);
+  }
+
+  .score-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--terracota);
+    line-height: 1;
+  }
+
+  .score-max {
+    font-size: 13px;
+    color: var(--gris);
+  }
+
+  .result-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .result-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 6vw, 36px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .result-title em {
+    font-style: italic;
+    color: var(--terracota);
+  }
+
+  .result-subtitle {
+    font-size: 16px;
+    color: var(--gris);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* RESULT CARD */
+  .result-card {
+    background: var(--blanco);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 32px var(--sombra);
+    margin-bottom: 20px;
+    border: 1px solid rgba(168,92,58,0.08);
+  }
+
+  .result-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--negro);
+  }
+
+  .result-card p {
+    font-size: 15px;
+    color: var(--gris);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .result-card p:last-child { margin-bottom: 0; }
+
+  .primer-paso {
+    background: rgba(168,92,58,0.06);
+    border-left: 3px solid var(--terracota);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin-top: 16px;
+  }
+
+  .primer-paso-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--terracota);
+    margin-bottom: 6px;
+  }
+
+  .primer-paso p {
+    font-size: 15px;
+    color: var(--negro);
+    font-weight: 400;
+    margin: 0;
+  }
+
+  /* CTA BLOCK */
+  .cta-block {
+    background: var(--negro);
+    border-radius: 20px;
+    padding: 36px 32px;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-block::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(168,92,58,0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--blanco);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .cta-block h3 em {
+    color: var(--terracota-light);
+    font-style: italic;
+  }
+
+  .cta-block p {
+    font-size: 15px;
+    color: rgba(253,250,246,0.7);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-includes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 28px;
+    text-align: left;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-includes-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: rgba(253,250,246,0.85);
+  }
+
+  .cta-includes-item::before {
+    content: '✓';
+    color: var(--terracota-light);
+    font-weight: 700;
+    font-size: 13px;
+    min-width: 16px;
+  }
+
+  .cta-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: rgba(253,250,246,0.5);
+    margin-bottom: 6px;
+    text-decoration: line-through;
+  }
+
+  .cta-price-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--blanco);
+    margin-bottom: 20px;
+  }
+
+  .cta-price-main span {
+    font-size: 16px;
+    color: rgba(253,250,246,0.6);
+    font-weight: 400;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    width: 100%;
+    max-width: 320px;
+    padding: 18px 32px;
+    background: var(--terracota);
+    color: var(--blanco);
+    border: none;
+    border-radius: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    margin-bottom: 12px;
+  }
+
+  .btn-cta:hover {
+    background: var(--terracota-light);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(168,92,58,0.4);
+  }
+
+  .cta-note {
+    font-size: 13px;
+    color: rgba(253,250,246,0.4);
+  }
+
+  /* FOOTER FIRMA */
+  .footer-firma {
+    text-align: center;
+    padding-top: 24px;
+  }
+
+  .footer-firma p {
+    font-size: 13px;
+    color: var(--gris);
+  }
+
+  .footer-firma strong {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--terracota);
+    font-size: 15px;
+  }
+
+  /* INTRO SCREEN */
+  .intro-screen {
+    text-align: center;
+  }
+
+  .intro-card {
+    background: var(--blanco);
+    border-radius: 20px;
+    padding: 40px 32px;
+    box-shadow: 0 4px 32px var(--sombra);
+    margin-bottom: 24px;
+    border: 1px solid rgba(168,92,58,0.08);
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  .intro-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--negro);
+  }
+
+  .intro-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: left;
+    margin-bottom: 28px;
+  }
+
+  .intro-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .intro-step-num {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 50%;
+    background: var(--terracota);
+    color: var(--blanco);
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .intro-step-text {
+    font-size: 15px;
+    color: var(--gris);
+    line-height: 1.5;
+  }
+
+  .intro-step-text strong {
+    color: var(--negro);
+    font-weight: 500;
+  }
+
+  .btn-start {
+    width: 100%;
+    padding: 18px;
+    background: var(--terracota);
+    color: var(--blanco);
+    border: none;
+    border-radius: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    animation: fadeUp 0.7s ease 0.4s both;
+  }
+
+  .btn-start:hover {
+    background: var(--terracota-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(168,92,58,0.3);
+  }
+
+  /* SCORE INDICATORS */
+  .score-indicators {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .score-indicator {
+    padding: 10px 6px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+    border: 2px solid transparent;
+  }
+
+  .score-indicator.active {
+    border-color: var(--terracota);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+
+  .hidden { display: none !important; }
+
+  @media (max-width: 480px) {
+    .container { padding: 28px 16px 60px; }
+    .question-card { padding: 28px 20px; }
+    .result-card { padding: 24px 20px; }
+    .cta-block { padding: 28px 20px; }
+    .intro-card { padding: 28px 20px; }
+    .score-indicators { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-badge">Test gratuito</div>
+    <h1>¿Tu equipo <em>despacha</em><br>o recomienda?</h1>
+    <p>Descubre en 5 minutos si tu farmacia está perdiendo ventas en el mostrador sin darse cuenta.</p>
+    <div class="header-divider"></div>
+  </div>
+
+  <!-- INTRO SCREEN -->
+  <div class="intro-screen" id="introScreen">
+    <div class="intro-card">
+      <h2>Antes de empezar</h2>
+      <div class="intro-steps">
+        <div class="intro-step">
+          <div class="intro-step-num">1</div>
+          <div class="intro-step-text"><strong>10 preguntas</strong> sobre tu equipo y tu mostrador. Responde con total sinceridad.</div>
+        </div>
+        <div class="intro-step">
+          <div class="intro-step-num">2</div>
+          <div class="intro-step-text">Valora cada afirmación del <strong>1 al 3</strong> según la frecuencia con la que ocurre en tu farmacia.</div>
+        </div>
+        <div class="intro-step">
+          <div class="intro-step-num">3</div>
+          <div class="intro-step-text">Al final recibes tu <strong>resultado inmediato</strong> con el primer paso concreto para tu caso.</div>
+        </div>
+      </div>
+      <div style="background:var(--beige); border-radius:12px; padding:14px 18px; margin-bottom:0; text-align:left;">
+        <div style="font-size:12px; color:var(--terracota); font-weight:500; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px;">Escala de valoración</div>
+        <div style="font-size:14px; color:var(--gris); line-height:1.8;">
+          <strong style="color:var(--negro)">1</strong> — Casi nunca ocurre &nbsp;·&nbsp;
+          <strong style="color:var(--negro)">2</strong> — A veces ocurre &nbsp;·&nbsp;
+          <strong style="color:var(--negro)">3</strong> — Ocurre habitualmente
+        </div>
+      </div>
+    </div>
+    <button class="btn-start" onclick="startQuiz()">Empezar el test →</button>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div id="quizScreen" class="hidden">
+    <div class="progress-wrap">
+      <div class="progress-info">
+        <span class="progress-label">Progreso</span>
+        <span class="progress-count" id="progressCount">1 / 10</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <div class="question-card" id="questionCard">
+      <div class="question-number" id="questionNumber">Pregunta 1 de 10</div>
+      <div class="question-text" id="questionText"></div>
+      <div class="options" id="optionsContainer"></div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn-back" id="btnBack" onclick="prevQuestion()" style="display:none">← Anterior</button>
+      <button class="btn-next" id="btnNext" onclick="nextQuestion()">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div class="result-screen" id="resultScreen">
+
+    <div class="result-header">
+      <div class="result-score-ring">
+        <div class="score-number" id="scoreNumber">0</div>
+        <div class="score-max">de 30</div>
+      </div>
+      <div class="result-badge" id="resultBadge"></div>
+      <div class="result-title" id="resultTitle"></div>
+      <div class="result-subtitle" id="resultSubtitle"></div>
+    </div>
+
+    <div class="score-indicators" id="scoreIndicators"></div>
+
+    <div class="result-card" id="resultCard">
+      <h3 id="resultCardTitle"></h3>
+      <div id="resultCardContent"></div>
+      <div class="primer-paso">
+        <div class="primer-paso-label">Tu primer paso</div>
+        <p id="primerPaso"></p>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <h3>¿Quieres pasar de <em>despachar</em><br>a recomendar con método?</h3>
+      <p>He creado una formación práctica de 90 minutos para titulares de farmacia que quieren que su equipo venda más sin presionar al cliente.</p>
+      <div class="cta-includes">
+        <div class="cta-includes-item">Taller en directo de 90 minutos</div>
+        <div class="cta-includes-item">Guía PDF Mostrador Rentable 3R</div>
+        <div class="cta-includes-item">Checklist imprimible para el equipo</div>
+        <div class="cta-includes-item">30 frases de mostrador listas para usar</div>
+        <div class="cta-includes-item">Plan de acción de 7 días</div>
+      </div>
+      <div class="cta-price">Precio normal: 97 €</div>
+      <div class="cta-price-main">47 € <span>precio lanzamiento</span></div>
+      <a href="https://instagram.com/veronicayneto" class="btn-cta" target="_blank">
+        Escríbeme "MOSTRADOR" en Instagram →
+      </a>
+      <div class="cta-note">Plazas limitadas · Precio de lanzamiento por tiempo limitado</div>
+    </div>
+
+    <div class="footer-firma">
+      <p>Con cariño y método,</p>
+      <p><strong>— Verónica Neto</strong></p>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    text: "Cuando un cliente pide un producto, el equipo pregunta para qué lo necesita antes de entregarlo.",
+    options: [
+      { label: "1 — Casi nunca ocurre", value: 1 },
+      { label: "2 — A veces ocurre", value: 2 },
+      { label: "3 — Ocurre de forma habitual", value: 3 }
+    ]
+  },
+  {
+    text: "El equipo recomienda productos complementarios cuando tienen sentido para el cliente.",
+    options: [
+      { label: "1 — Casi nunca ocurre", value: 1 },
+      { label: "2 — A veces ocurre", value: 2 },
+      { label: "3 — Ocurre de forma habitual", value: 3 }
+    ]
+  },
+  {
+    text: "En dermocosmética, se intenta recomendar rutina completa y no solo producto suelto.",
+    options: [
+      { label: "1 — Casi nunca ocurre", value: 1 },
+      { label: "2 — A veces ocurre", value: 2 },
+      { label: "3 — Ocurre de forma habitual", value: 3 }
+    ]
+  },
+  {
+    text: "El equipo sabe explicar los beneficios de los productos sin sonar técnico ni pesado.",
+    options: [
+      { label: "1 — Casi nunca ocurre", value: 1 },
+      { label: "2 — A veces ocurre", value: 2 },
+      { label: "3 — Ocurre de forma habitual", value: 3 }
+    ]
+  },
+  {
+    text: "Existen frases comunes en el equipo para recomendar sin presionar al cliente.",
+    options: [
+      { label: "1 — Casi nunca ocurre", value: 1 },
+      { label: "2 — A veces ocurre", value: 2 },
+      { label: "3 — Ocurre de forma habitual", value: 3 }
+    ]
+  },
+  {
+    text: "Se revisan los productos parados para introducirlos en campañas o conversaciones del mostrador.",
+    options: [
+      { label: "1 — Casi nunca ocurre", value: 1 },
+      { label: "2 — A veces ocurre", value: 2 },
+      { label: "3 — Ocurre de forma habitual", value: 3 }
+    ]
+  },
+  {
+    text: "El equipo conoce qué categorías tienen más margen o más potencial de venta.",
+    options: [
+      { label: "1 — Casi nunca ocurre", value: 1 },
+      { label: "2 — A veces ocurre", value: 2 },
+      { label: "3 — Ocurre de forma habitual", value: 3 }
+    ]
+  },
+  {
+    text: "Se hace seguimiento de clientes cuando compran tratamientos, rutinas o productos específicos.",
+    options: [
+      { label: "1 — Casi nunca ocurre", value: 1 },
+      { label: "2 — A veces ocurre", value: 2 },
+      { label: "3 — Ocurre de forma habitual", value: 3 }
+    ]
+  },
+  {
+    text: "Las campañas se preparan con argumentario, exposición y objetivo de venta claro.",
+    options: [
+      { label: "1 — Casi nunca ocurre", value: 1 },
+      { label: "2 — A veces ocurre", value: 2 },
+      { label: "3 — Ocurre de forma habitual", value: 3 }
+    ]
+  },
+  {
+    text: "Como titular, sabes qué oportunidades se pierden en el mostrador cada semana.",
+    options: [
+      { label: "1 — Casi nunca ocurre", value: 1 },
+      { label: "2 — A veces ocurre", value: 2 },
+      { label: "3 — Ocurre de forma habitual", value: 3 }
+    ]
+  }
+];
+
+const results = [
+  {
+    range: [10, 16],
+    badge: "🔴 Mostrador Pasivo",
+    badgeBg: "#FEE2E2",
+    badgeColor: "#991B1B",
+    title: "Tu mostrador está\n<em>perdiendo ventas cada día</em>",
+    subtitle: "Tu equipo atiende y entrega lo que el cliente pide, pero se pierden muchas oportunidades en cada conversación. Hay una fuga clara de venta, rotación y fidelización.",
+    cardTitle: "Lo que está pasando en tu farmacia",
+    cardContent: "<p>El mostrador funciona como un punto de entrega, no como un espacio de recomendación. Los clientes se van solo con lo que han pedido, sin que nadie detecte si necesitan algo más.</p><p>No es un problema de intención. Es un problema de método y de frases. El equipo no sabe cómo recomendar sin parecer insistente, así que prefiere no hacerlo.</p>",
+    primerPaso: "Crea 5 frases básicas de recomendación para las categorías que más vendes y trabájalas con el equipo en una reunión de 15 minutos esta semana."
+  },
+  {
+    range: [17, 23],
+    badge: "🟠 Mostrador Irregular",
+    badgeBg: "#FEF3C7",
+    badgeColor: "#92400E",
+    title: "Hay intención, pero\n<em>falta método constante</em>",
+    subtitle: "Algunas personas del equipo venden bien y otras no. Los resultados dependen demasiado de quién esté en el mostrador. Eso no es un sistema, es improvisación.",
+    cardTitle: "Lo que está pasando en tu farmacia",
+    cardContent: "<p>La buena noticia es que ya existe intención de recomendar. La mala es que no hay criterios comunes ni protocolos claros, y eso hace que los resultados sean inconsistentes.</p><p>Cuando los resultados dependen de la persona y no del sistema, la farmacia no puede crecer de forma predecible.</p>",
+    primerPaso: "Unifica frases y protocolos sencillos para que todo el equipo recomiende con la misma seguridad. Empieza por las 3 categorías con más potencial."
+  },
+  {
+    range: [24, 28],
+    badge: "🟡 Mostrador con Potencial",
+    badgeBg: "#ECFDF5",
+    badgeColor: "#065F46",
+    title: "Buena base,\n<em>pero hay margen real de mejora</em>",
+    subtitle: "Tu farmacia ya tiene una cultura de recomendación. Con pequeños ajustes en venta cruzada, seguimiento y rotación podrías aumentar significativamente el ticket medio.",
+    cardTitle: "Lo que está pasando en tu farmacia",
+    cardContent: "<p>El equipo recomienda, pero de forma parcial. Se hacen recomendaciones simples pero no se completan tratamientos, no se trabajan rutinas completas ni se hace seguimiento posterior.</p><p>Estás a un paso de tener un mostrador realmente rentable. El siguiente nivel está en la sistemática, no en el esfuerzo.</p>",
+    primerPaso: "Trabaja campañas con argumentario, diseña rutinas de recomendación por categoría y crea un protocolo simple de seguimiento postventa."
+  },
+  {
+    range: [29, 30],
+    badge: "✅ Mostrador Rentable",
+    badgeBg: "#EDE9FE",
+    badgeColor: "#5B21B6",
+    title: "Tienes sistema.\n<em>Ahora toca profesionalizarlo.</em>",
+    subtitle: "Tu equipo tiene una buena cultura de recomendación. El siguiente paso es medir resultados, crear protocolos formales y hacer que la venta no dependa de la improvisación.",
+    cardTitle: "Lo que está pasando en tu farmacia",
+    cardContent: "<p>Enhorabuena. Tu farmacia tiene una base sólida de recomendación. Pero incluso los mejores sistemas tienen margen de mejora cuando se profesionalizan.</p><p>El siguiente paso es pasar de 'funciona bien' a 'funciona con datos y protocolos'. Medir indicadores, revisar categorías clave y crear un sistema de seguimiento postventa te llevará al siguiente nivel.</p>",
+    primerPaso: "Revisa tus indicadores clave, crea protocolos documentados para el equipo y establece un sistema de seguimiento postventa que fidelice a largo plazo."
+  }
+];
+
+let currentQuestion = 0;
+let answers = new Array(10).fill(null);
+
+function startQuiz() {
+  document.getElementById('introScreen').classList.add('hidden');
+  document.getElementById('quizScreen').classList.remove('hidden');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[currentQuestion];
+  document.getElementById('questionNumber').textContent = `Pregunta ${currentQuestion + 1} de ${questions.length}`;
+  document.getElementById('questionText').textContent = q.text;
+  document.getElementById('progressCount').textContent = `${currentQuestion + 1} / ${questions.length}`;
+  document.getElementById('progressFill').style.width = `${((currentQuestion) / questions.length) * 100}%`;
+
+  const container = document.getElementById('optionsContainer');
+  container.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn' + (answers[currentQuestion] === opt.value ? ' selected' : '');
+    btn.innerHTML = `<div class="option-dot">${opt.value}</div><span>${opt.label}</span>`;
+    btn.onclick = () => selectOption(opt.value, btn);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('btnBack').style.display = currentQuestion > 0 ? 'block' : 'none';
+  updateNextBtn();
+
+  // Animate card
+  const card = document.getElementById('questionCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'fadeUp 0.4s ease both';
+}
+
+function selectOption(value, btn) {
+  answers[currentQuestion] = value;
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  updateNextBtn();
+}
+
+function updateNextBtn() {
+  const btn = document.getElementById('btnNext');
+  const isLast = currentQuestion === questions.length - 1;
+  btn.textContent = isLast ? 'Ver mi resultado →' : 'Siguiente →';
+  if (answers[currentQuestion] !== null) {
+    btn.classList.add('active');
+  } else {
+    btn.classList.remove('active');
+  }
+}
+
+function nextQuestion() {
+  if (answers[currentQuestion] === null) return;
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function prevQuestion() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    renderQuestion();
+  }
+}
+
+function showResult() {
+  document.getElementById('quizScreen').classList.add('hidden');
+
+  const total = answers.reduce((sum, a) => sum + (a || 0), 0);
+  const result = results.find(r => total >= r.range[0] && total <= r.range[1]) || results[results.length - 1];
+
+  document.getElementById('scoreNumber').textContent = total;
+  document.getElementById('resultBadge').textContent = result.badge;
+  document.getElementById('resultBadge').style.background = result.badgeBg;
+  document.getElementById('resultBadge').style.color = result.badgeColor;
+  document.getElementById('resultTitle').innerHTML = result.title.replace('\n', '<br>');
+  document.getElementById('resultSubtitle').textContent = result.subtitle;
+  document.getElementById('resultCardTitle').textContent = result.cardTitle;
+  document.getElementById('resultCardContent').innerHTML = result.cardContent;
+  document.getElementById('primerPaso').textContent = result.primerPaso;
+
+  // Score indicators
+  const indicators = document.getElementById('scoreIndicators');
+  indicators.innerHTML = '';
+  const levels = [
+    { label: '🔴 Pasivo', range: '10-16', bg: '#FEE2E2', color: '#991B1B' },
+    { label: '🟠 Irregular', range: '17-23', bg: '#FEF3C7', color: '#92400E' },
+    { label: '🟡 Potencial', range: '24-28', bg: '#ECFDF5', color: '#065F46' },
+    { label: '✅ Rentable', range: '29-30', bg: '#EDE9FE', color: '#5B21B6' },
+  ];
+  levels.forEach((l, i) => {
+    const div = document.createElement('div');
+    div.className = 'score-indicator' + (result.badge.includes(l.label.split(' ')[1]) ? ' active' : '');
+    div.style.background = l.bg;
+    div.style.color = l.color;
+    div.innerHTML = `<div style="font-size:16px;margin-bottom:4px">${l.label.split(' ')[0]}</div><div>${l.label.split(' ').slice(1).join(' ')}</div><div style="font-size:11px;opacity:0.7;margin-top:2px">${l.range} pts</div>`;
+    indicators.appendChild(div);
+  });
+
+  const resultScreen = document.getElementById('resultScreen');
+  resultScreen.classList.add('show');
+
+  // Update progress to 100%
+  document.getElementById('progressFill').style.width = '100%';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
